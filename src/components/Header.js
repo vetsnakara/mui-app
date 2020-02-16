@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Header = () => {
+const Header = ({ onMenuOpen }) => {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -44,7 +44,12 @@ const Header = () => {
   return (
     <AppBar position="static">
       <Toolbar className={classes.toolBar}>
-        <IconButton edge="start" className={classes.menuButton} color="inherit">
+        <IconButton
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          onClick={onMenuOpen}
+        >
           <MenuIcon />
         </IconButton>
         <Typography className={classes.title} variant="h6">
@@ -57,7 +62,7 @@ const Header = () => {
           <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
             <MenuItem onClick={handleClose}>Update</MenuItem>
             <MenuItem onClick={handleClose}>Help</MenuItem>
-            <MenuItem onClick={handleClose}>Log Out</MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
           </Menu>
         </div>
       </Toolbar>
