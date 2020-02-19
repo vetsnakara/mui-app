@@ -1,9 +1,11 @@
 import React from "react";
 
-import { Button, Icon, Fab } from "@material-ui/core";
+import { Button, Icon, Box, Fab, Popover, Typography } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/styles";
 import { green, blueGrey } from "@material-ui/core/colors";
 import { Add as AddIcon } from "@material-ui/icons";
+
+import Form from "../components/Form";
 
 const useStyles = makeStyles({
   root: {
@@ -37,8 +39,24 @@ const RemoveButton = withStyles({
   }
 })(Button);
 
-const AppButtons = ({ itemsChecked, onDeleteChecked }) => {
+const AppButtons = ({ itemsChecked, onDeleteChecked, onAdd }) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const classes = useStyles();
+
+  const handleOpen = e => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleAdd = item => {
+    handleClose();
+    onAdd(item);
+  };
+
+  const open = Boolean(anchorEl);
 
   return (
     <React.Fragment>
@@ -47,9 +65,29 @@ const AppButtons = ({ itemsChecked, onDeleteChecked }) => {
           className={classes.button}
           variant="contained"
           color="secondary"
+          onClick={handleOpen}
         >
           Добавить элемент
         </AddButton>
+
+        <Popover
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center"
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}
+        >
+          <Box p={2}>
+            <Form onAdd={handleAdd} />
+          </Box>
+        </Popover>
+
         <RemoveButton
           className={classes.button}
           variant="contained"
@@ -70,7 +108,7 @@ const AppButtons = ({ itemsChecked, onDeleteChecked }) => {
       </div>
       <Fab className={classes.plusButton} color="primary" aria-label="add">
         <AddIcon />
-      </Fab>
+      </Fab>{" "}
     </React.Fragment>
   );
 };

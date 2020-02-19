@@ -42,6 +42,19 @@ const App = () => {
     setList(list => list.filter(item => !item.checked));
   };
 
+  const handleAdd = item => {
+    const { title: name, description } = item;
+
+    setList(list => [
+      {
+        name,
+        description,
+        checked: false
+      },
+      ...list
+    ]);
+  };
+
   return (
     <React.Fragment>
       <Header onMenuOpen={handleMenuOpen} />
@@ -50,6 +63,7 @@ const App = () => {
         <AppButtons
           itemsChecked={list.filter(item => item.checked)}
           onDeleteChecked={handleDeleteChecked}
+          onAdd={handleAdd}
         />
         <List items={list} onCheck={handleCheck} />
       </Container>
