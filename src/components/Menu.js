@@ -26,7 +26,8 @@ const useStyles = makeStyles({
   },
   menuItem: {
     marginBottom: 10
-  }
+  },
+  iconLeft: {}
 });
 
 const menuItems = [
@@ -41,7 +42,7 @@ const Menu = ({ open, onClose }) => {
     <Drawer open={open} onClose={onClose}>
       <MenuList className={classes.menuList}>
         {menuItems.map(({ title, icon: Icon }) => (
-          <MenuItem className={classes.menuItem}>
+          <MenuItem className={classes.menuItem} key={title}>
             <ListItemIcon>
               <Icon color="primary" />
             </ListItemIcon>
