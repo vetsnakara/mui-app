@@ -2,10 +2,13 @@ import React from "react";
 
 import { Button, Icon, Fab } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/styles";
-import { green, red } from "@material-ui/core/colors";
+import { green, blueGrey } from "@material-ui/core/colors";
 import { Add as AddIcon } from "@material-ui/icons";
 
 const useStyles = makeStyles({
+  root: {
+    marginBottom: 40
+  },
   button: {
     marginRight: 20
   },
@@ -27,9 +30,9 @@ const AddButton = withStyles({
 
 const RemoveButton = withStyles({
   root: {
-    backgroundColor: red[500],
+    backgroundColor: blueGrey[500],
     "&:hover": {
-      backgroundColor: red[700]
+      backgroundColor: blueGrey[700]
     }
   }
 })(Button);
@@ -39,7 +42,7 @@ const AppButtons = () => {
 
   return (
     <React.Fragment>
-      <div>
+      <div className={classes.root}>
         <AddButton
           className={classes.button}
           variant="contained"
