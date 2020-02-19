@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 const App = () => {
   const [list, setList] = React.useState([
     { name: "item 1", description: "Some description here...", checked: false },
-    { name: "item 2", description: "Some description here...", checked: false },
+    { name: "item 2", description: "Some description here...", checked: true },
     { name: "item 3", description: "Some description here...", checked: false },
     { name: "item 4", description: "Some description here...", checked: false }
   ]);
@@ -30,13 +30,28 @@ const App = () => {
   const handleMenuOpen = () => setMenuOpen(true);
   const handleMenuClose = () => setMenuOpen(false);
 
+  const handleCheck = name => {
+    setList(list =>
+      list.map(item =>
+        item.name === name ? { ...item, checked: !item.checked } : item
+      )
+    );
+  };
+
+  const handleDeleteChecked = () => {
+    setList(list => list.filter(item => !item.checked));
+  };
+
   return (
     <React.Fragment>
       <Header onMenuOpen={handleMenuOpen} />
       <Menu open={menuOpen} onClose={handleMenuClose} />
       <Container fixed className={classes.container}>
-        <AppButtons />
-        <List items={list} />
+        <AppButtons
+          itemsChecked={list.filter(item => item.checked)}
+          onDeleteChecked={handleDeleteChecked}
+        />
+        <List items={list} onCheck={handleCheck} />
       </Container>
     </React.Fragment>
   );

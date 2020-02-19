@@ -37,7 +37,7 @@ const RemoveButton = withStyles({
   }
 })(Button);
 
-const AppButtons = () => {
+const AppButtons = ({ itemsChecked, onDeleteChecked }) => {
   const classes = useStyles();
 
   return (
@@ -54,6 +54,8 @@ const AppButtons = () => {
           className={classes.button}
           variant="contained"
           color="primary"
+          disabled={itemsChecked.length === 0}
+          onClick={onDeleteChecked}
         >
           Удалить выбранные элементы
         </RemoveButton>
@@ -63,7 +65,7 @@ const AppButtons = () => {
           href="https://google.com"
           target="_blank"
         >
-          Save
+          Google
         </Button>
       </div>
       <Fab className={classes.plusButton} color="primary" aria-label="add">
