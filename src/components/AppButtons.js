@@ -1,9 +1,8 @@
 import React from "react";
 
-import { Button, Icon, Box, Fab, Popover, Typography } from "@material-ui/core";
+import { Button, Icon, Box, Popover } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/styles";
 import { green, blueGrey } from "@material-ui/core/colors";
-import { Add as AddIcon } from "@material-ui/icons";
 
 import Form from "../components/Form";
 
@@ -106,9 +105,6 @@ const AppButtons = ({ itemsChecked, onDeleteChecked, onAdd }) => {
           Google
         </Button>
       </div>
-      <Fab className={classes.plusButton} color="primary" aria-label="add">
-        <AddIcon />
-      </Fab>{" "}
     </React.Fragment>
   );
 };
